@@ -63,18 +63,6 @@ structured AI-generated feedback through a simple developer-focused UI.
 - Frontend: Render Static Site
 - Backend: Render Web Service
 
-## Architecture
-
-React Frontend
-       ↓
-FastAPI Backend
-       ↓
-Google Gemini API
-       ↓
-Structured Response
-       ↓
-React Frontend
-
 ## How It Works
 
 1. User enters source code.
