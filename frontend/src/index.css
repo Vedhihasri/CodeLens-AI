@@ -1,0 +1,2057 @@
+/* =========================================================
+   AI CODE REVIEWER
+   Global Styles
+   ========================================================= */
+
+
+/* =========================================================
+   1. IMPORTS
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+/* =========================================================
+   2. THEME VARIABLES
+   Dark Mode = DEFAULT
+   ========================================================= */
+
+:root {
+  color-scheme: dark;
+
+  /* Background */
+  --bg: #090b10;
+  --panel: #10131a;
+  --panel-2: #0d1016;
+
+  /* Borders */
+  --border: #202633;
+  --border-bright: #2c3545;
+
+  /* Text */
+  --text: #f2f5fa;
+  --muted: #8b95a7;
+  --subtle: #5c6677;
+
+  /* Accent */
+  --accent: #8b7cff;
+  --cyan: #5fd3ff;
+
+  /* Status */
+  --danger: #ff7272;
+  --warning: #e7ad62;
+  --green: #61d69b;
+
+  /* Effects */
+  --shadow: rgba(0, 0, 0, 0.16);
+}
+
+
+/* =========================================================
+   3. LIGHT THEME
+   Activated by .light-mode on .app-shell
+   ========================================================= */
+
+.app-shell.light-mode {
+  color-scheme: light;
+
+  --bg: #f5f7fb;
+  --panel: #ffffff;
+  --panel-2: #f8f9fc;
+
+  --border: #e2e6ee;
+  --border-bright: #cfd5e1;
+
+  --text: #18202d;
+  --muted: #667085;
+  --subtle: #8a94a6;
+
+  --accent: #6658e8;
+  --cyan: #1597c4;
+
+  --danger: #dc4c4c;
+  --warning: #b7791f;
+  --green: #22915e;
+
+  --shadow: rgba(20, 30, 50, 0.08);
+}
+
+
+/* =========================================================
+   4. GLOBAL RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+}
+
+button,
+textarea,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+textarea {
+  outline: none;
+}
+
+
+/* =========================================================
+   5. APP SHELL
+   ========================================================= */
+
+.app-shell {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      ellipse at 50% -20%,
+      rgba(76, 65, 155, 0.14),
+      transparent 44%
+    ),
+    var(--bg);
+
+  color: var(--text);
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+
+/* Light background */
+
+.app-shell.light-mode {
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      rgba(102, 88, 232, 0.08),
+      transparent 32%
+    ),
+    var(--bg);
+}
+
+
+/* =========================================================
+   6. TOP NAVIGATION
+   ========================================================= */
+
+.topbar {
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 max(28px, calc((100vw - 1240px) / 2));
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.light-mode .topbar {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: var(--border);
+}
+
+
+/* =========================================================
+   7. COMMON FLEX UTILITIES
+   ========================================================= */
+
+.brand,
+.topbar-meta,
+.powered,
+.hero,
+.panel-header,
+.result-heading,
+.section-title,
+.code-output-header,
+.footer {
+  display: flex;
+  align-items: center;
+}
+
+
+/* =========================================================
+   8. BRAND
+   ========================================================= */
+
+.brand {
+  gap: 11px;
+}
+
+.brand-mark {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #46406f;
+  border-radius: 9px;
+
+  background: linear-gradient(
+    140deg,
+    #29234d,
+    #13152b
+  );
+
+  color: #9c91ff;
+}
+
+.light-mode .brand-mark {
+  background: #eeeaff;
+  border-color: #dcd5ff;
+  color: var(--accent);
+}
+
+.brand strong {
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+.brand strong span {
+  color: #9a8fff;
+}
+
+.light-mode .brand strong span {
+  color: var(--accent);
+}
+
+.brand small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--subtle);
+
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   9. TOPBAR STATUS
+   ========================================================= */
+
+.topbar-meta {
+  gap: 15px;
+}
+
+.powered {
+  gap: 7px;
+
+  color: #aeb7c7;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.light-mode .powered {
+  color: var(--muted);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+
+  display: inline-block;
+
+  border-radius: 50%;
+
+  background: var(--green);
+
+  box-shadow: 0 0 10px var(--green);
+}
+
+
+/* =========================================================
+   10. THEME TOGGLE
+   ========================================================= */
+
+.theme-dot {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  background: var(--panel);
+  color: var(--muted);
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+
+  outline: none;
+}
+
+.theme-dot:hover {
+  background: var(--panel-2);
+  border-color: var(--border-bright);
+  color: var(--text);
+
+  transform: translateY(-1px);
+}
+
+.theme-dot:focus-visible {
+  box-shadow: 0 0 0 3px rgba(139, 124, 255, 0.15);
+}
+
+
+/* =========================================================
+   11. PAGE CONTAINER
+   ========================================================= */
+
+.page-container {
+  width: 100%;
+  max-width: 1240px;
+
+  margin: 0 auto;
+
+  padding: 47px 28px 25px;
+}
+
+
+/* =========================================================
+   12. HERO SECTION
+   ========================================================= */
+
+.hero {
+  justify-content: space-between;
+
+  margin-bottom: 37px;
+}
+
+.gemini-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 10px;
+
+  border: 1px solid rgba(139, 124, 255, 0.25);
+  border-radius: 6px;
+
+  background: rgba(139, 124, 255, 0.1);
+
+  color: #a79bff;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.03em;
+}
+
+.hero h1 {
+  margin: 15px 0 9px;
+
+  font-size: 34px;
+  line-height: 1.1;
+
+  letter-spacing: -0.045em;
+}
+
+.hero p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   13. HERO STAT
+   ========================================================= */
+
+.hero-stat {
+  padding-left: 22px;
+
+  text-align: right;
+
+  border-left: 1px solid var(--border);
+}
+
+.hero-stat span {
+  display: block;
+
+  color: var(--accent);
+
+  font: 500 25px 'DM Mono', monospace;
+}
+
+.hero-stat small {
+  display: block;
+
+  color: var(--subtle);
+
+  font-size: 8px;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   14. WORKSPACE
+   ========================================================= */
+
+.workspace {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.93fr)
+    minmax(0, 1.07fr);
+
+  gap: 18px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   15. MAIN PANELS
+   ========================================================= */
+
+.panel {
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: rgba(16, 19, 26, 0.82);
+
+  box-shadow: 0 18px 48px var(--shadow);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.light-mode .panel {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+
+/* =========================================================
+   16. PANEL HEADER
+   ========================================================= */
+
+.panel-header {
+  justify-content: space-between;
+
+  padding: 21px 22px 18px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+
+  color: var(--subtle);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.panel h2 {
+  margin: 0;
+
+  font-size: 16px;
+
+  letter-spacing: -0.02em;
+}
+
+
+/* =========================================================
+   17. ICON BUTTON
+   ========================================================= */
+
+.icon-button {
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--border);
+  border-radius: 7px;
+
+  background: transparent;
+  color: var(--muted);
+
+  transition: 0.2s ease;
+}
+
+.icon-button:hover {
+  color: var(--text);
+
+  border-color: var(--border-bright);
+
+  background: #171b24;
+}
+
+.light-mode .icon-button:hover {
+  background: #f5f6fa;
+}
+
+
+/* =========================================================
+   18. TASK GRID
+   ========================================================= */
+
+.task-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 8px;
+
+  padding: 17px 18px;
+}
+
+
+/* =========================================================
+   19. TASK CARD
+   ========================================================= */
+
+.task-card {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  min-height: 72px;
+
+  padding: 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: #0e1117;
+  color: var(--text);
+
+  text-align: left;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.task-card:hover {
+  border-color: #3c4556;
+  background: #141821;
+
+  transform: translateY(-1px);
+}
+
+.light-mode .task-card {
+  background: #ffffff;
+}
+
+.light-mode .task-card:hover {
+  border-color: #cfc8ff;
+  background: #fafaff;
+}
+
+.task-card.active {
+  border-color: rgba(139, 124, 255, 0.55);
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(77, 65, 151, 0.23),
+      rgba(20, 22, 35, 0.7)
+    );
+
+  box-shadow:
+    0 0 0 1px rgba(139, 124, 255, 0.08);
+}
+
+.light-mode .task-card.active {
+  border-color: #bdb4ff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f4f1ff,
+      #ffffff
+    );
+}
+
+.task-icon {
+  flex: none;
+
+  color: #8d96a8;
+}
+
+.task-card.active .task-icon {
+  color: #9c91ff;
+}
+
+.task-card strong,
+.task-card small {
+  display: block;
+}
+
+.task-card strong {
+  margin: 1px 0 4px;
+
+  font-size: 11px;
+}
+
+.task-card small {
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.task-check {
+  position: absolute;
+
+  top: 9px;
+  right: 9px;
+
+  color: var(--accent);
+}
+
+
+/* =========================================================
+   20. CODE EDITOR
+   ========================================================= */
+
+.editor-wrap {
+  margin: 0 18px;
+
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: #090c11;
+}
+
+.light-mode .editor-wrap {
+  background: #ffffff;
+}
+
+.editor-bar {
+  height: 31px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 11px;
+
+  border-bottom: 1px solid var(--border);
+
+  color: var(--subtle);
+
+  font: 10px 'DM Mono', monospace;
+}
+
+.light-mode .editor-bar {
+  background: #f7f8fb;
+}
+
+.editor-dots {
+  display: flex;
+
+  gap: 4px;
+}
+
+.editor-dots i {
+  width: 6px;
+  height: 6px;
+
+  display: block;
+
+  border-radius: 50%;
+
+  background: #333a47;
+}
+
+.editor-dots i:first-child {
+  background: #655a6b;
+}
+
+.language-indicator {
+  margin-left: auto;
+
+  color: #6d788b;
+}
+
+
+/* =========================================================
+   21. EDITOR BODY
+   ========================================================= */
+
+.editor-body {
+  display: flex;
+
+  min-height: 300px;
+
+  background: transparent;
+}
+
+.line-numbers {
+  min-width: 42px;
+
+  padding: 17px 11px 17px 14px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 6px;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.045);
+
+  color: #3d4655;
+
+  font: 11px/1.45 'DM Mono', monospace;
+
+  user-select: none;
+}
+
+.light-mode .line-numbers {
+  background: #f8f9fc;
+
+  color: #a0a8b7;
+
+  border-color: var(--border);
+}
+
+.editor-body textarea {
+  flex: 1;
+
+  min-width: 0;
+
+  resize: none;
+
+  padding: 17px 15px;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: #d7e0ee;
+
+  font: 11px/1.45 'DM Mono', monospace;
+}
+
+.light-mode .editor-body textarea {
+  color: #273142;
+}
+
+.editor-body textarea::placeholder {
+  color: #465060;
+}
+
+.light-mode .editor-body textarea::placeholder {
+  color: #a0a8b7;
+}
+
+
+/* =========================================================
+   22. EDITOR FOOTER
+   ========================================================= */
+
+.editor-footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 9px 12px;
+
+  border-top: 1px solid var(--border);
+
+  color: #687386;
+
+  font-size: 9px;
+}
+
+.light-mode .editor-footer {
+  background: #f7f8fb;
+
+  color: var(--muted);
+}
+
+.editor-footer span:first-child {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+}
+
+
+/* =========================================================
+   23. ANALYZE BUTTON
+   ========================================================= */
+
+.analyze-button {
+  width: calc(100% - 36px);
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 17px 18px 19px;
+
+  border: 1px solid #7c70ec;
+  border-radius: 7px;
+
+  background:
+    linear-gradient(
+      110deg,
+      #7567e8,
+      #9a7ffc
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 22px rgba(112, 97, 232, 0.2);
+
+  font-size: 12px;
+  font-weight: 800;
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.analyze-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  filter: brightness(1.1);
+}
+
+.analyze-button:disabled {
+  opacity: 0.65;
+
+  cursor: wait;
+}
+
+.button-shortcut {
+  margin-left: auto;
+  margin-right: 4px;
+
+  color: #d9d2ff;
+
+  font: 10px 'DM Mono', monospace;
+}
+
+
+/* =========================================================
+   24. RESULT PANEL
+   ========================================================= */
+
+.result-panel-header {
+  padding-bottom: 18px;
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: var(--green);
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   25. EMPTY RESULT STATE
+   ========================================================= */
+
+.empty-state {
+  min-height: 535px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 30px;
+
+  text-align: center;
+}
+
+.empty-icon {
+  width: 49px;
+  height: 49px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 17px;
+
+  border: 1px solid #343255;
+  border-radius: 13px;
+
+  background: rgba(139, 124, 255, 0.1);
+
+  color: #9589ff;
+}
+
+.empty-state h3 {
+  margin: 0 0 7px;
+
+  font-size: 15px;
+}
+
+.empty-state p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 11px;
+}
+
+.empty-hint {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 35px;
+
+  color: var(--subtle);
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   26. RESULT CONTENT
+   ========================================================= */
+
+.result-content {
+  padding: 23px;
+}
+
+.result-heading {
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.result-heading h2 {
+  margin: 0;
+
+  font-size: 19px;
+}
+
+
+/* =========================================================
+   27. LANGUAGE BADGE
+   ========================================================= */
+
+.language-badge {
+  display: inline-block;
+
+  margin-left: 7px;
+
+  padding: 4px 7px;
+
+  border: 1px solid rgba(95, 211, 255, 0.25);
+  border-radius: 4px;
+
+  background: rgba(95, 211, 255, 0.08);
+
+  color: var(--cyan);
+
+  font-size: 8px;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  vertical-align: middle;
+}
+
+
+/* =========================================================
+   28. COPY BUTTON
+   ========================================================= */
+
+.copy-button {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 7px 9px;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  transition: 0.2s ease;
+}
+
+.copy-button:hover {
+  color: var(--text);
+
+  border-color: var(--border-bright);
+
+  background: var(--panel-2);
+}
+
+
+/* =========================================================
+   29. SUMMARY
+   ========================================================= */
+
+.summary-card {
+  margin-bottom: 25px;
+
+  padding: 15px;
+
+  border: 1px solid rgba(139, 124, 255, 0.23);
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      115deg,
+      rgba(93, 79, 191, 0.11),
+      rgba(15, 18, 26, 0.5)
+    );
+}
+
+.light-mode .summary-card {
+  background:
+    linear-gradient(
+      115deg,
+      rgba(102, 88, 232, 0.08),
+      rgba(255, 255, 255, 0.9)
+    );
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: #a599ff;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.summary-card p {
+  margin: 10px 0 0;
+
+  color: #d8ddea;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.light-mode .summary-card p {
+  color: #475467;
+}
+
+
+/* =========================================================
+   30. RESULT SECTIONS
+   ========================================================= */
+
+.result-section {
+  margin-bottom: 25px;
+}
+
+.section-title {
+  justify-content: space-between;
+
+  margin-bottom: 11px;
+}
+
+.section-title h3 {
+  margin: 0;
+
+  font-size: 11px;
+}
+
+.section-title span {
+  color: var(--subtle);
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   31. ISSUES
+   ========================================================= */
+
+.issues-list {
+  display: grid;
+
+  gap: 8px;
+}
+
+.issue-card {
+  padding: 13px;
+
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--warning);
+
+  border-radius: 7px;
+
+  background: #0e1117;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.light-mode .issue-card {
+  background: #ffffff;
+}
+
+.severity-high {
+  border-left-color: var(--danger);
+}
+
+.severity-low {
+  border-left-color: var(--green);
+}
+
+.issue-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.issue-top h4 {
+  margin: 0;
+
+  font-size: 11px;
+}
+
+.severity-badge {
+  padding: 3px 6px;
+
+  border-radius: 4px;
+
+  background: rgba(231, 173, 98, 0.1);
+
+  color: var(--warning);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+}
+
+.severity-high .severity-badge {
+  background: rgba(255, 114, 114, 0.1);
+
+  color: var(--danger);
+}
+
+.severity-low .severity-badge {
+  background: rgba(97, 214, 155, 0.1);
+
+  color: var(--green);
+}
+
+.issue-card p {
+  margin: 8px 0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   32. SUGGESTION
+   ========================================================= */
+
+.suggestion {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 4px;
+
+  color: #abb4c4;
+
+  font-size: 10px;
+}
+
+.light-mode .suggestion {
+  color: #667085;
+}
+
+.suggestion svg {
+  flex: none;
+
+  margin-top: 1px;
+
+  color: var(--accent);
+}
+
+
+/* =========================================================
+   33. POSITIVE STATE
+   ========================================================= */
+
+.positive-state {
+  display: flex;
+
+  gap: 9px;
+
+  padding: 14px;
+
+  border: 1px solid rgba(97, 214, 155, 0.2);
+  border-radius: 7px;
+
+  background: rgba(97, 214, 155, 0.05);
+
+  color: var(--green);
+
+  font-size: 11px;
+}
+
+.positive-state p {
+  margin: 4px 0 0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   34. SUGGESTION LIST
+   ========================================================= */
+
+.suggestion-list {
+  display: grid;
+
+  gap: 7px;
+}
+
+.suggestion-list div {
+  display: flex;
+
+  gap: 6px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+.suggestion-list svg {
+  flex: none;
+
+  color: var(--accent);
+}
+
+/* =========================================================
+   35. COMPLEXITY
+   ========================================================= */
+
+.complexity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.metric-card {
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #0e1117;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.light-mode .metric-card {
+  background: #ffffff;
+}
+
+.metric-card span {
+  display: block;
+
+  color: var(--subtle);
+
+  font-family: "Manrope", sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.metric-card strong {
+  display: block;
+  margin-top: 8px;
+
+  color: var(--text);
+
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+
+  line-height: 1.6;
+  letter-spacing: normal;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+/* =========================================================
+   36. CODE OUTPUT
+   ========================================================= */
+
+.code-output {
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: #090c11;
+}
+
+.light-mode .code-output {
+  background: #f7f8fb;
+}
+
+.code-output-header {
+  justify-content: space-between;
+
+  padding: 13px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.code-output-header p {
+  margin: 4px 0 0;
+
+  color: var(--subtle);
+
+  font-size: 9px;
+}
+
+.code-output pre {
+  max-height: 220px;
+
+  overflow: auto;
+
+  margin: 0;
+
+  padding: 16px;
+
+  color: #cbd5e4;
+
+  font: 11px/1.6 'DM Mono', monospace;
+}
+
+.light-mode .code-output pre {
+  color: #273142;
+}
+
+
+/* =========================================================
+   37. ERROR CARD
+   ========================================================= */
+
+.error-card {
+  display: flex;
+
+  gap: 9px;
+
+  margin: 0 18px;
+
+  padding: 12px;
+
+  border: 1px solid rgba(255, 114, 114, 0.22);
+  border-radius: 7px;
+
+  background: rgba(255, 114, 114, 0.06);
+
+  color: var(--danger);
+
+  font-size: 11px;
+}
+
+.light-mode .error-card {
+  background: #fff5f5;
+
+  border-color: #f0c4c4;
+}
+
+.error-card p {
+  margin: 4px 0 0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   38. FOOTER
+   ========================================================= */
+
+.footer {
+  justify-content: space-between;
+
+  margin-top: 21px;
+
+  color: var(--muted);
+
+  font-size: 9px;
+}
+
+.footer span:first-child {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+}
+
+.muted {
+  color: var(--subtle);
+}
+
+
+/* =========================================================
+   39. LOADING ANIMATION
+   ========================================================= */
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   40. THEME TRANSITIONS
+   ========================================================= */
+
+.app-shell,
+.app-shell * {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   41. TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .empty-state {
+    min-height: 300px;
+  }
+
+}
+
+
+/* =========================================================
+   42. MOBILE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+  .topbar {
+    height: 62px;
+
+    padding: 0 17px;
+  }
+
+  .page-container {
+    padding: 32px 15px 22px;
+  }
+
+  .hero {
+    margin-bottom: 26px;
+  }
+
+  .hero h1 {
+    font-size: 29px;
+  }
+
+  .hero-stat {
+    display: none;
+  }
+
+  .task-grid {
+    grid-template-columns: 1fr 1fr;
+
+    padding: 13px;
+  }
+
+  .editor-wrap {
+    margin: 0 13px;
+  }
+
+  .analyze-button {
+    width: calc(100% - 26px);
+
+    margin-left: 13px;
+    margin-right: 13px;
+  }
+
+  .panel-header {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
+  .result-content {
+    padding: 17px;
+  }
+
+  .footer {
+    font-size: 8px;
+  }
+
+  .powered {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================
+   43. SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .task-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .editor-body {
+    min-height: 250px;
+  }
+
+  .editor-footer span:first-child {
+    font-size: 8px;
+  }
+
+  .brand small {
+    display: none;
+  }
+
+  .brand strong {
+    font-size: 12px;
+  }
+
+}
+/* =========================================================
+   EXPLANATION CONTENT
+   ========================================================= */
+
+.explanation-content {
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+
+/* Main headings */
+
+.explanation-content h1,
+.explanation-content h2,
+.explanation-content h3 {
+  margin-top: 28px;
+  margin-bottom: 12px;
+
+  color: var(--text);
+
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.explanation-content h1 {
+  font-size: 18px;
+}
+
+.explanation-content h2 {
+  font-size: 15px;
+}
+
+.explanation-content h3 {
+  font-size: 13px;
+}
+
+
+/* First heading should not have huge top spacing */
+
+.explanation-content > h1:first-child,
+.explanation-content > h2:first-child,
+.explanation-content > h3:first-child {
+  margin-top: 0;
+}
+
+
+/* Paragraphs */
+
+.explanation-content p {
+  margin: 0 0 14px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+  line-height: 1.75;
+}
+
+
+/* Bold text */
+
+.explanation-content strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+
+/* Lists */
+
+.explanation-content ul,
+.explanation-content ol {
+  margin: 10px 0 17px;
+  padding-left: 22px;
+
+  color: var(--muted);
+}
+
+.explanation-content li {
+  margin-bottom: 7px;
+
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.explanation-content li::marker {
+  color: var(--accent);
+}
+
+
+/* Inline code */
+
+.explanation-content code {
+  padding: 2px 5px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 4px;
+
+  background: var(--panel-2);
+
+  color: var(--cyan);
+
+  font: 10px 'DM Mono', monospace;
+}
+
+
+/* Code blocks */
+
+.explanation-content pre {
+  overflow-x: auto;
+
+  margin: 14px 0 18px;
+
+  padding: 14px 16px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: #090c11;
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.light-mode .explanation-content pre {
+  background: #f1f3f7;
+}
+
+.explanation-content pre code {
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #cbd5e4;
+
+  font: 11px/1.7 'DM Mono', monospace;
+}
+
+.light-mode .explanation-content pre code {
+  color: #273142;
+}
+
+
+/* Horizontal divider */
+
+.explanation-content hr {
+  margin: 22px 0;
+
+  border: 0;
+
+  border-top: 1px solid var(--border);
+}
+
+
+/* Links if Gemini ever returns one */
+
+.explanation-content a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.explanation-content a:hover {
+  text-decoration: underline;
+}
+
+.chat-section {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel-2);
+}
+
+.chat-header h2 {
+  margin: 7px 0 5px;
+  font-size: 17px;
+}
+
+.chat-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.chat-input-wrap {
+  margin-top: 14px;
+  position: relative;
+}
+
+.chat-input-wrap textarea {
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+  padding: 13px 100px 13px 13px;
+  border: 1px solid var(--border-bright);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  outline: none;
+}
+
+.chat-input-wrap textarea:focus {
+  border-color: var(--accent);
+}
+
+.chat-input-wrap textarea::placeholder {
+  color: var(--subtle);
+}
+
+.chat-send-button {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 7px 10px;
+  border: none;
+  border-radius: 8px;
+
+  background: var(--accent);
+  color: white;
+
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chat-send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chat-answer {
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+}
+
+.chat-answer-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 9px;
+
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+/* ==========================================
+   FOLLOW-UP AI RESPONSE
+========================================== */
+
+.chat-answer-content {
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+
+/* Paragraphs */
+
+.chat-answer-content p {
+  margin: 0 0 12px;
+  color: var(--text);
+}
+
+
+/* Headings */
+
+.chat-answer-content h1,
+.chat-answer-content h2,
+.chat-answer-content h3,
+.chat-answer-content h4 {
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.35;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.chat-answer-content h1 {
+  font-size: 18px;
+}
+
+.chat-answer-content h2 {
+  font-size: 16px;
+}
+
+.chat-answer-content h3 {
+  font-size: 14px;
+}
+
+.chat-answer-content h4 {
+  font-size: 13px;
+}
+
+
+/* First heading should not have unnecessary top space */
+
+.chat-answer-content > h1:first-child,
+.chat-answer-content > h2:first-child,
+.chat-answer-content > h3:first-child {
+  margin-top: 0;
+}
+
+
+/* Lists */
+
+.chat-answer-content ul,
+.chat-answer-content ol {
+  margin: 8px 0 14px;
+  padding-left: 22px;
+}
+
+.chat-answer-content li {
+  margin-bottom: 6px;
+  padding-left: 2px;
+}
+
+
+/* Nested lists */
+
+.chat-answer-content li > ul,
+.chat-answer-content li > ol {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+/* Bold text */
+
+.chat-answer-content strong {
+  font-weight: 650;
+  color: var(--text);
+}
+
+
+/* Inline code */
+
+.chat-answer-content code {
+  padding: 2px 5px;
+  border-radius: 5px;
+
+  background: var(--border);
+
+  color: var(--cyan);
+
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+}
+
+
+/* Code blocks */
+
+.chat-answer-content pre {
+  margin: 12px 0;
+  padding: 13px;
+
+  overflow-x: auto;
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  background: #080a0f;
+}
+
+.chat-answer-content pre code {
+  padding: 0;
+
+  background: transparent;
+
+  color: var(--text);
+
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+
+/* Links */
+
+.chat-answer-content a {
+  color: var(--cyan);
+  text-decoration: none;
+}
+
+.chat-answer-content a:hover {
+  text-decoration: underline;
+}
+
+
+/* Horizontal line */
+
+.chat-answer-content hr {
+  margin: 16px 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+
+/* Blockquote */
+
+.chat-answer-content blockquote {
+  margin: 12px 0;
+  padding: 8px 12px;
+
+  border-left: 2px solid var(--accent);
+
+  color: var(--muted);
+  background: var(--panel-2);
+}
+
+
+/* Last element */
+
+.chat-answer-content > *:last-child {
+  margin-bottom: 0;
+}
