@@ -325,7 +325,7 @@ async function handleSubmit() {
   try {
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/ask",
+  `${import.meta.env.VITE_API_URL}/ask`,
       {
         task: task,
         code: code,
@@ -364,13 +364,13 @@ async function handleChat() {
   try {
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/chat",
-      {
-        code: code,
-        question: question,
-        context: result?.summary || "",
-      }
-    );
+    `${import.meta.env.VITE_API_URL}/chat`,
+    {
+      code: code,
+      question: question,
+      context: result?.summary || "",
+    }
+  );
 
     setChatAnswer(response.data.answer);
     setQuestion("");
